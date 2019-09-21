@@ -1,0 +1,84 @@
+package com.example.plates;
+
+
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Bundle;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+
+import android.text.Layout;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class ItemizeDialogFragment extends DialogFragment {
+
+    EditText itemPrice;
+    EditText itemName;
+    Spinner people;
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = requireActivity().getLayoutInflater();
+
+        View dialogView = inflater.inflate(R.layout.fragment_itemize, null);
+        itemPrice = dialogView.findViewById(R.id.item_price);
+        itemName = dialogView.findViewById(R.id.item_name);
+        people = dialogView.findViewById(R.id.user_spinner);
+
+        ArrayList<String> names = getArguments().getStringArrayList("names");
+        ArrayAdapter<String> nameAdapter = new ArrayAdapter<String>(this.getActivity(),
+                android.R.layout.simple_spinner_dropdown_item, names);
+
+        people.setAdapter(nameAdapter);
+
+        builder.setView(dialogView)
+                .setPositiveButton("Add Item", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        itemizeListener.onDialogPositiveClick(ItemizeDialogFragment.this);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        itemizeListener.onDialogNegativeClick(ItemizeDialogFragment.this);
+                    }
+                });
+
+        return builder.create();
+    }
+
+    public interface ItemizeDialogListener {
+        void onDialogPositiveClick(DialogFragment dialog);
+        void onDialogNegativeClick(DialogFragment dialog);
+    }
+
+    private ItemizeDialogListener itemizeListener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            itemizeListener = (ItemizeDialogListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException((""));
+        }
+    }
+
+}

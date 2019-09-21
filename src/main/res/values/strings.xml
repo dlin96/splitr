@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Plates</string>
+    <string name="add_person">Add Person</string>
+    <string name="person_textbox_hint">Enter a name</string>
+    <string name="tip_hint">Tip Percentage</string>
+    <string name="subtotal_hint">Subtotal of bill</string>
+    <string name="item_name_hint">Item Name</string>
+    <string name="item_price_hint">Item Price</string>
+</resources>
