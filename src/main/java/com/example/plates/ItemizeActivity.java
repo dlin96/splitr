@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -47,6 +48,7 @@ public class ItemizeActivity extends FragmentActivity implements ItemizeDialogFr
         bundle.putStringArrayList("names", names);
         overview.append("subtotal: " + subtotal + "\n");
         overview.append("tip percentage: " + tip*100 + "%\n");
+        overview.append("tip amount: "  + (tip * subtotal) + "\n");
         overview.append("total: " + total + "\n");
         overview.append("People: \n");
         for (String name : names) {
@@ -77,10 +79,15 @@ public class ItemizeActivity extends FragmentActivity implements ItemizeDialogFr
     public void onDialogPositiveClick(DialogFragment dialog) {
         String itemName = itemize.itemName.getText().toString();
         double itemPrice = Double.parseDouble(itemize.itemPrice.getText().toString());
-        String name = itemize.people.getSelectedItem().toString();
+        ArrayList<String> participants = new ArrayList<>();
+        for (CheckBox cb : itemize.people) {
+            if (cb.isChecked()) {
+                participants.add(cb.getText().toString());
+            }
+        }
 
         Item item = new Item(itemPrice, itemName);
-        bill.addItem(item, name);
+        bill.addSharedItems(item, participants);
 
         StringBuilder sb = new StringBuilder();
         for (String person : names) {
