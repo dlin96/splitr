@@ -30,8 +30,8 @@ public class ItemizeDialogFragment extends DialogFragment {
 
     EditText itemPrice;
     EditText itemName;
-//    Spinner people;
     ArrayList<CheckBox> people;
+    
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -40,14 +40,9 @@ public class ItemizeDialogFragment extends DialogFragment {
         View dialogView = inflater.inflate(R.layout.fragment_itemize, null);
         itemPrice = dialogView.findViewById(R.id.item_price);
         itemName = dialogView.findViewById(R.id.item_name);
-//        people = dialogView.findViewById(R.id.user_spinner);
         people = new ArrayList<>();
 
         ArrayList<String> names = getArguments().getStringArrayList("names");
-//        ArrayAdapter<String> nameAdapter = new ArrayAdapter<String>(this.getActivity(),
-//                android.R.layout.simple_spinner_dropdown_item, names);
-//
-//        people.setAdapter(nameAdapter);
 
         LinearLayout ll = dialogView.findViewById(R.id.participants);
         for (String name: names) {
@@ -56,6 +51,7 @@ public class ItemizeDialogFragment extends DialogFragment {
             people.add(cb);
             ll.addView(cb);
         }
+
         builder.setView(dialogView)
                 .setPositiveButton("Add Item", new DialogInterface.OnClickListener() {
                     @Override
