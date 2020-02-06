@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     final AlertDialog.Builder alertDialogBuilder =
                             new AlertDialog.Builder(view.getContext())
                                     .setTitle("Blank Name")
-                                    .setMessage("Names cannot be empty!")
+                                    .setMessage("Name cannot be empty!")
                                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
                                             dialog.dismiss();
@@ -58,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
                                     })
                                     ;
 
-// Show the AlertDialog.
+                    // Show the AlertDialog.
                     alertDialogBuilder.show();
-                } else {
+                } else {    // received non-empty name. Add to list.
                     people.add(name);
                     name_list.append(name + "\n");
                     names.setText("");
@@ -72,8 +72,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ItemizeActivity.class);
+                if (subtotal.getText().length() == 0) {
+                    final AlertDialog.Builder alertDialogBuilder =
+                            new AlertDialog.Builder(view.getContext())
+                                    .setTitle("Empty Subtotal")
+                                    .setMessage("Subtotal cannot be empty!")
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    })
+                            ;
+
+                    // Show the AlertDialog.
+                    alertDialogBuilder.show();
+                    return;
+                }
                 intent.putExtra("subtotal", Double.parseDouble(subtotal.getText().toString()));
-                intent.putExtra("tip", Integer.parseInt(tip.getText().toString()));
+                int tip_val = 0;
+                if (tip.getText().toString().length() > 0) {
+                    tip_val = Integer.parseInt(tip.getText().toString());
+                }
+                intent.putExtra("tip", tip_val);
                 intent.putExtra("names", people);
 
                 startActivity(intent);

@@ -25,8 +25,8 @@ class Person {
 		for (Item item : items) {
 			bill.append(item.toString()).append("\n");
 		}
-
-		bill.append(" owes ").append(amountOwed).append("\n");
+		bill.append("Total Amount Owed: ").append(String.format(java.util.Locale.US, "%.2f\n", amountOwed)
+		).append("\n");
 		return bill.toString();
 	}
 }

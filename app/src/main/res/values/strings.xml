@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">Plates</string>
-    <string name="add_person">Add Person</string>
-    <string name="person_textbox_hint">Enter a name</string>
-    <string name="tip_hint">Tip Percentage</string>
-    <string name="subtotal_hint">Subtotal of bill</string>
-    <string name="item_name_hint">Item Name</string>
-    <string name="item_price_hint">Item Price</string>
+    <string name="app_name" translatable="false">Plates</string>
+    <string name="add_person" translatable="false">Add Person</string>
+    <string name="person_textbox_hint" translatable="false">Enter a name</string>
+    <string name="tip_hint" translatable="false">Tip Percentage</string>
+    <string name="subtotal_hint" translatable="false">Subtotal of bill</string>
+    <string name="item_name_hint" translatable="false">Item Name</string>
+    <string name="item_price_hint" translatable="false">Item Price</string>
+    <string name="exceed_subtotal_error" translatable="false">Can\'t add item, exceeds subtotal!</string>
 </resources>

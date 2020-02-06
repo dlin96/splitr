@@ -1,5 +1,7 @@
 package com.example.splitter;
 
+import static java.lang.String.format;
+
 class Item {
 	double price;
 	String name;
@@ -16,6 +18,7 @@ class Item {
 
 	@Override
 	public String toString() {
-		return name + "\t" + price;
+		String itemprice = String.format(java.util.Locale.US, "%.2f", price);
+		return name + "\t" + itemprice;
 	}
 }
